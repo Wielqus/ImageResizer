@@ -1,0 +1,12 @@
+.imageContainer {
+    background-color: aliceblue;
+    width:              40vw;
+    height:             70vh;
+    justify-self:       center;
+    border-radius:      20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+  }
