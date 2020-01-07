@@ -1,5 +1,7 @@
 import * as React from "react";
+import DragAndDrop from './DragAndDrop';
 import "./Image.css";
+
 
 export interface IProps {
   name: string;
@@ -21,8 +23,7 @@ class Image extends React.Component<IProps, IState> {
   public render() {
     return (
       <div className="imageContainer">
-        <image />
-        <h2>Drop here</h2>
+        <DragAndDrop label="drop here" />
       </div>
     );
   }
