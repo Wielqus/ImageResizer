@@ -2,9 +2,7 @@ import * as React from "react";
 import "./DragAndDrop.css";
 
 export interface IProps {
-    label: string;
     handleDrop(data: FileList): void;
-
 }
 
 interface IState {
@@ -17,9 +15,8 @@ class DragAndDrop extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.state = {
-            drag:     false,
-            dragging: false,
-            
+            drag:       false,
+            dragging:   false,
         };
       }
 
@@ -55,8 +52,7 @@ class DragAndDrop extends React.Component<IProps, IState> {
     public render() {
         return (
             <div className="DragAndDrop" onDragEnter={this.handleDragIn} onDrop={this.handleDrop} onDragOver={this.handleDrag} onDragLeave={this.handleDragOut}>
-                <h2>{this.props.label}</h2>
-                {this.props.children}
+                {this.props.children}              
             </div>
         )
     }

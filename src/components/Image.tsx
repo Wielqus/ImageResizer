@@ -31,9 +31,12 @@ class Image extends React.Component<IProps, IState> {
   public render() {
     return (
       <div className="imageContainer">
-        <DragAndDrop handleDrop={this.handleFiles}  label="drop here" >
+        <DragAndDrop handleDrop={this.handleFiles} >
           <div>
-            <p>{this.state.file ? this.state.file.name : "Empty"}</p>
+            {this.state.file ? 
+            <img className="image" src={URL.createObjectURL(this.state.file)} /> 
+            : 
+            <h1>Drop here</h1>}
           </div>
         </DragAndDrop>
       </div>
