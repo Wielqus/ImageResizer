@@ -3,10 +3,13 @@ import "./DragAndDrop.css";
 
 export interface IProps {
     label: string;
+    handleDrop(data: FileList): void;
+
 }
 
 interface IState {
     dragging: boolean
+    drag:     boolean
 }
 
 class DragAndDrop extends React.Component<IProps, IState> {
@@ -14,7 +17,9 @@ class DragAndDrop extends React.Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.state = {
-            dragging: false
+            drag:     false,
+            dragging: false,
+            
         };
       }
 
@@ -40,14 +45,18 @@ class DragAndDrop extends React.Component<IProps, IState> {
     public handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault()
         e.stopPropagation()
+        this.setState({drag: false})
+        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+            this.props.handleDrop(e.dataTransfer.files)
+            e.dataTransfer.clearData()
+        }
     }
 
     public render() {
         return (
-            <div className="DragAndDrop" onDragEnter={this.handleDragIn} onDragEnd={this.handleDragOut} onDragLeave={this.handleDragOut}>
+            <div className="DragAndDrop" onDragEnter={this.handleDragIn} onDrop={this.handleDrop} onDragOver={this.handleDrag} onDragLeave={this.handleDragOut}>
                 <h2>{this.props.label}</h2>
                 {this.props.children}
-                <p>{this.state.dragging ? "Dragging" : ""}</p>
             </div>
         )
     }

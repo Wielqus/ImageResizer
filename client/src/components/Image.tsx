@@ -8,22 +8,34 @@ export interface IProps {
 }
 
 interface IState {
-  loading: boolean
+  loading: boolean;
+  file:   File | null;
 }
 
 class Image extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
     this.state = {
-        loading: false
+        file: null,
+        loading: false,
+    
     };
+  }
+
+  public handleFiles = (data: FileList) =>{
+    this.setState({file: data[0]})
+    return
   }
 
 
   public render() {
     return (
       <div className="imageContainer">
-        <DragAndDrop label="drop here" />
+        <DragAndDrop handleDrop={this.handleFiles}  label="drop here" >
+          <div>
+            <p>{this.state.file ? this.state.file.name : "Empty"}</p>
+          </div>
+        </DragAndDrop>
       </div>
     );
   }
